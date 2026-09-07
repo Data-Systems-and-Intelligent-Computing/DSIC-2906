@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "dsic2906/canonical_entity.schema.json",
+  "title": "CanonicalEntity",
+  "description": "Entitas terkanonikalisasi hasil entity linking. Linking bukan novelty, tetapi wajib auditable.",
+  "type": "object",
+  "required": ["entity_id", "canonical_name", "seed_source_id", "link_method"],
+  "properties": {
+    "entity_id": {"type": "string"},
+    "canonical_name": {"type": "string"},
+    "normalized_key": {"type": "string", "description": "kunci hasil normalisasi nama, dipakai untuk linking"},
+    "seed_source_id": {"type": "string", "description": "biasanya jadesta"},
+    "jadesta_id": {"type": ["string", "null"]},
+    "wikidata_qid": {"type": ["string", "null"], "pattern": "^Q[0-9]+$"},
+    "wikipedia_title": {"type": ["string", "null"]},
+    "region": {"type": ["string", "null"]},
+    "category": {"type": ["string", "null"]},
+    "link_method": {"enum": ["exact", "fuzzy", "manual", "unlinked"]},
+    "link_score": {"type": ["number", "null"], "minimum": 0, "maximum": 100},
+    "link_reviewed_by": {"type": ["string", "null"]},
+    "in_candidate_pool": {"type": "boolean"},
+    "in_heldout": {"type": "boolean"}
+  },
+  "additionalProperties": true
+}

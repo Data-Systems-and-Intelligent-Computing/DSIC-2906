@@ -1,0 +1,72 @@
+# Parameter eksperimen utama (E3-E5).
+experiment:
+  id: DSIC-2906
+  seed: 42
+  policies: [B0, B1, B2, P1]
+  primary_query: Q1
+  secondary_query: Q2
+  optional_query: Q3
+
+# Unit keputusan dan unit analisis TIDAK sama.
+units:
+  decision_unit: "entity_id x attribute x query_time"
+  bootstrap_resampling_unit: entity_id   # bukan article, bukan claim row
+
+candidate_pool:
+  target_min: 300
+  target_max: 500
+  stratify_by: [region, category, source_coverage]
+  freeze_before_external_enrichment: true
+  selection_must_not_depend_on_p1_output: true
+
+heldout:
+  entities_min: 100
+  entities_max: 150
+  attributes_per_entity: 3
+  requests_min: 300
+  requests_max: 450
+  must_include:
+    - with_news
+    - without_news
+    - clean_agreement
+    - structured_conflict
+    - augmented_conflict
+    - time_sensitive
+    - stable_control
+
+metrics:
+  primary:
+    - selective_accuracy
+    - selective_risk
+    - answer_coverage
+    - unsupported_answer_rate
+  value_of_news:
+    - decision_change_rate
+    - beneficial_decision_change_rate
+    - harmful_decision_change_rate
+    - news_evidence_utilization_rate
+  cost:
+    - verification_rate
+    - abstention_rate
+    - p50_latency_ms
+    - p95_latency_ms
+    - evidence_claims_touched
+    - articles_touched
+
+# Accuracy tidak boleh dilaporkan sendirian.
+reporting_rule: "risk selalu dilaporkan bersama coverage dan verification"
+
+latency:
+  warmup_runs: 2
+  measured_repetitions: 20
+  randomize_policy_order: true
+  concurrency: 1
+  exclude_crawling_and_preprocessing: true
+
+statistics:
+  bootstrap_iterations: 10000
+  confidence_level: 0.95
+  mcnemar: optional
+
+failure_analysis:
+  min_cases: 20

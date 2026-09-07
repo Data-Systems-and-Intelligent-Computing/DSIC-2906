@@ -1,0 +1,28 @@
+# Runtime minimum DSIC-2906.
+# Versi di-pin longgar; bekukan versi persis ke docs/reproducibility.md
+# sebelum held-out evaluation.
+
+# Konfigurasi & utilitas
+pyyaml>=6.0
+python-dateutil>=2.9
+
+# Akuisisi
+requests>=2.32
+beautifulsoup4>=4.12
+trafilatura>=1.12
+scrapy>=2.11
+
+# Data & analisis
+pandas>=2.2
+numpy>=1.26
+pyarrow>=17.0
+scipy>=1.13
+
+# Lakehouse client
+trino>=0.329
+
+# Validasi kontrak schema
+jsonschema>=4.22
+
+# Plot
+matplotlib>=3.9

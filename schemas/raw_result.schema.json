@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "dsic2906/raw_result.schema.json",
+  "title": "RawResult",
+  "description": "Hasil satu request setelah dipasangkan dengan gold. Input langsung untuk metrik dan paired bootstrap.",
+  "type": "object",
+  "required": ["request_id", "entity_id", "policy", "action", "answered", "correct"],
+  "properties": {
+    "request_id": {"type": "string"},
+    "entity_id": {"type": "string", "description": "unit resampling bootstrap"},
+    "attribute": {"type": "string"},
+    "attribute_class": {"enum": ["time_sensitive", "stable_control"]},
+    "policy": {"enum": ["B0", "B1", "B2", "P1"]},
+    "action": {"enum": ["D", "V", "A"]},
+    "answered": {"type": "boolean"},
+    "returned_value": {"type": ["string", "null"]},
+    "gold_outcome": {"enum": ["accepted_value", "unresolved_unknown", "not_applicable"]},
+    "correct": {"type": ["boolean", "null"], "description": "null bila tidak menjawab"},
+    "unsupported": {"type": ["boolean", "null"], "description": "menjawab tanpa supported evidence"},
+    "obsolete": {"type": ["boolean", "null"], "description": "menjawab dengan nilai yang sudah usang pada query_time"},
+    "verification_invoked": {"type": "boolean"},
+    "evidence_claims_touched": {"type": "integer", "minimum": 0},
+    "latency_ms": {"type": ["number", "null"]}
+  },
+  "additionalProperties": true
+}

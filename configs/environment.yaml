@@ -1,0 +1,46 @@
+# Snapshot environment. Wajib identik untuk B0/B1/B2/P1 (gate penelitian:
+# same Trino configuration, same hardware/resource cap).
+host:
+  cpu_model: FILL
+  cores: FILL
+  threads: FILL
+  ram_gb: FILL
+  storage_medium: FILL
+  os: FILL
+  kernel: FILL
+
+software:
+  docker: FILL
+  python: FILL
+  java: FILL
+  trino: FILL
+  spark: FILL
+  iceberg: FILL
+  minio: FILL
+  airflow: FILL_OR_NOT_USED
+
+# Sumber kebenaran cap resource: docker-compose.yml + .env.
+enforced_caps:
+  trino_cpus: 4
+  trino_memory: 8g
+  spark_cpus: 4
+  spark_memory: 8g
+  minio_cpus: 2
+  minio_memory: 4g
+
+pinned_images:
+  minio: minio/minio:RELEASE.2025-04-22T22-12-26Z
+  mc: minio/mc:RELEASE.2025-04-16T18-13-26Z
+  iceberg_rest: apache/iceberg-rest-fixture:1.9.1
+  trino: trinodb/trino:476
+  spark: apache/spark:3.5.6-scala2.12-java17-python3-ubuntu
+  airflow: apache/airflow:2.10.5
+  note: "Verifikasi ketersediaan tag saat E0, lalu bekukan versi persisnya di docs/reproducibility.md"
+
+catalog:
+  type: rest
+  reason: "Spark (writer) dan Trino (reader) harus melihat snapshot Iceberg yang sama persis"
+
+benchmark:
+  concurrency: 1
+  autoscaling: false

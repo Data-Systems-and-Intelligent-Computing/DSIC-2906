@@ -1,0 +1,27 @@
+# Definisi conflict state. Dibekukan sebelum held-out (gate Minggu 2).
+# Label: CLEAN | MODERATE | SEVERE | INSUFFICIENT
+
+# Jumlah sumber independen minimum agar sebuah value dianggap corroborated.
+# Independen dihitung SETELAH dedupe family dan story lineage.
+corroboration:
+  min_independent_sources: 2
+
+labels:
+  CLEAN:
+    description: "Seluruh eligible claim setuju setelah normalisasi dan temporal filtering."
+    condition: "distinct_normalized_values == 1 dan eligible_claims >= 1"
+  MODERATE:
+    description: "Ada perbedaan, tetapi satu value corroborated atau ada evidence baru yang perlu diverifikasi."
+    condition: "distinct_normalized_values > 1 dan tepat satu value corroborated"
+  SEVERE:
+    description: "Claim penting bertentangan tanpa dasar cukup untuk memilih supported value."
+    condition: "distinct_normalized_values > 1 dan corroborated_values != 1"
+  INSUFFICIENT:
+    description: "Evidence relevan tidak cukup."
+    condition: "eligible_claims == 0"
+
+states:
+  structured_only: C_S      # structured evidence saja
+  augmented: C_SU           # structured + news yang temporally eligible
+
+freeze_before_heldout: true

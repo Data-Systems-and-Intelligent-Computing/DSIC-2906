@@ -1,0 +1,32 @@
+# Protokol anotasi gold. Detail di docs/annotation-protocol.md.
+gold:
+  unit: "entity_id x attribute x query_time"
+  outcomes: [accepted_value, unresolved_unknown, not_applicable]
+  judged_as_of_query_time: true
+
+# Aturan yang paling sering dilanggar tanpa sengaja:
+rules:
+  no_evidence_after_query_time: true
+  news_is_not_automatically_truth: true
+  majority_source_is_not_automatically_correct: true
+  gold_must_not_contain_only_known_conflicts: true
+
+second_annotation:
+  gold_request_fraction_min: 0.20
+  gold_request_fraction_max: 0.25
+  news_claim_fraction_min: 0.20
+  news_claim_target_count: 100
+
+agreement:
+  metric: cohen_kappa
+  report_per_attribute: true
+
+adjudication:
+  required_before_final_evaluation: true
+  log: data/annotations/adjudication_log.csv
+
+freeze_before_heldout:
+  - entity_list
+  - query_times
+  - source_cutoff
+  - evidence_cutoff

@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "dsic2906/gold_label.schema.json",
+  "title": "GoldLabel",
+  "description": "Label gold dinilai as-of query_time. Evidence setelah query_time dilarang.",
+  "type": "object",
+  "required": ["request_id", "entity_id", "attribute", "query_time", "outcome", "annotator_id"],
+  "properties": {
+    "request_id": {"type": "string"},
+    "entity_id": {"type": "string"},
+    "attribute": {"type": "string"},
+    "query_time": {"type": "string", "format": "date-time"},
+    "outcome": {"enum": ["accepted_value", "unresolved_unknown", "not_applicable"]},
+    "accepted_values": {"type": "array", "items": {"type": "string"}, "description": "boleh lebih dari satu bila beberapa nilai dapat diterima"},
+    "evidence_refs": {"type": "array", "items": {"type": "string"}, "description": "claim_id / snapshot_id / URL yang menjadi dasar"},
+    "annotator_id": {"type": "string"},
+    "annotated_at": {"type": "string", "format": "date-time"},
+    "is_second_annotation": {"type": "boolean"},
+    "adjudicated": {"type": "boolean"},
+    "adjudication_note": {"type": ["string", "null"]}
+  },
+  "additionalProperties": true
+}

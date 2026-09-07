@@ -1,0 +1,38 @@
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+
+# Secrets
+.env
+
+# Infrastructure state
+volumes/
+infra/volumes/
+
+# Data: payload mentah dan tabel lakehouse tidak masuk Git.
+# Yang di-commit hanya manifest, checksum, dan anotasi.
+data/raw/**
+!data/raw/**/.gitkeep
+data/bronze/**
+!data/bronze/.gitkeep
+data/silver/**
+!data/silver/.gitkeep
+data/gold/**
+!data/gold/.gitkeep
+*.parquet
+*.warc.gz
+
+# Results: figure/tabel final boleh di-commit saat freeze, log mentah tidak.
+results/raw/**
+!results/raw/.gitkeep
+results/processed/**
+!results/processed/.gitkeep
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/

@@ -1,0 +1,1 @@
+claim_id,entity_id,attribute,raw_value,normalized_value,source_id,source_family,story_lineage_id,representation_type,published_or_observed_at,fetched_at,url_or_reference,snapshot_id,support_span_text,support_valid,extractor_version

@@ -1,0 +1,30 @@
+# Parameter akuisisi. Etika crawling bukan opsional.
+crawler:
+  user_agent_env: CRAWLER_USER_AGENT
+  delay_seconds: 2
+  respect_robots_txt: true
+  max_pages_per_publisher: 500
+  timeout_seconds: 30
+  retries: 3
+
+# Field yang WAJIB tercatat untuk setiap payload mentah.
+# Tanpa ini, gate "snapshots reproducible" tidak dapat lulus.
+required_provenance_fields:
+  - source_id
+  - url_or_reference
+  - publisher
+  - published_at
+  - fetched_at
+  - http_status
+  - discovery_query
+  - checksum_sha256
+  - raw_path
+
+storage:
+  raw_zone: s3://dsic2906/raw
+  layout: "{source_id}/{fetched_date}/{checksum}.{ext}"
+  immutable: true
+
+wikimedia:
+  user_agent_env: WIKIMEDIA_USER_AGENT
+  max_revisions_per_page: 1     # ambil revisi as-of cutoff, bukan seluruh riwayat

@@ -1,0 +1,30 @@
+# Routing rule. Dibekukan sebelum held-out (gate Minggu 2).
+# Action: D = Direct, V = Verify, A = Abstain
+
+policies:
+  B0:
+    name: uniform_direct
+    state: none
+    rule: "semua request -> Direct"
+  B1:
+    name: structured_only_conflict_handling
+    state: C_S
+    rule: {CLEAN: D, MODERATE: V, SEVERE: A, INSUFFICIENT: A}
+  B2:
+    name: always_verify
+    state: C_SU
+    rule: "semua request -> Verify"
+  P1:
+    name: cross_format_conflict_aware
+    state: C_SU
+    rule: {CLEAN: D, MODERATE: V, SEVERE: A, INSUFFICIENT: A}
+
+# Berlaku untuk B1, B2, dan P1: Verify yang tidak menemukan supported value
+# berakhir Abstain, bukan menebak.
+verify_without_supported_value: A
+
+# B1 dan P1 memakai rule identik; satu-satunya perbedaan adalah state
+# (C_S vs C_SU). Ini yang mengisolasi value-of-news.
+isolation_note: "B1 dan P1 berbagi tabel rule yang sama agar perbedaan hasil hanya berasal dari evidence, bukan dari rule."
+
+freeze_before_heldout: true

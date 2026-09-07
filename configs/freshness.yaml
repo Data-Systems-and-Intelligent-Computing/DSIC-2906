@@ -1,0 +1,17 @@
+# Freshness window per atribut. Dibekukan sebelum held-out test.
+# Aturan keras: tidak ada evidence dengan published_at > query_time.
+temporal:
+  hard_rule_no_evidence_after_query_time: true
+
+# Nilai awal; final ditetapkan setelah coverage audit akhir Minggu 1 (H7).
+freshness_window_days:
+  operational_status: 180       # time-sensitive
+  accessibility_condition: 180  # time-sensitive
+  category: null                # stable control: tidak kedaluwarsa
+
+# Atribut final dibekukan setelah coverage audit. 2 time-sensitive + 1 stable.
+attributes:
+  time_sensitive: [operational_status, accessibility_condition]
+  stable_control: [category]
+
+freeze_before_heldout: true

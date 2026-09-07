@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "dsic2906/evidence_claim.schema.json",
+  "title": "EvidenceClaim",
+  "description": "Representasi bersama untuk evidence structured maupun unstructured. Claim unstructured tanpa support_span valid tidak boleh dihitung sebagai corroboration.",
+  "type": "object",
+  "required": [
+    "claim_id", "entity_id", "attribute", "normalized_value",
+    "source_id", "source_family", "representation_type",
+    "published_or_observed_at", "extractor_version"
+  ],
+  "properties": {
+    "claim_id": {"type": "string"},
+    "entity_id": {"type": "string"},
+    "attribute": {"type": "string"},
+    "raw_value": {"type": ["string", "null"]},
+    "normalized_value": {"type": ["string", "null"]},
+    "source_id": {"type": "string"},
+    "source_family": {"type": "string"},
+    "story_lineage_id": {"type": ["string", "null"]},
+    "representation_type": {"enum": ["structured", "semi_structured_text", "unstructured_text"]},
+    "published_or_observed_at": {"type": ["string", "null"], "format": "date-time"},
+    "fetched_at": {"type": ["string", "null"], "format": "date-time"},
+    "url_or_reference": {"type": ["string", "null"]},
+    "snapshot_id": {"type": ["string", "null"]},
+    "support_span": {
+      "type": ["object", "null"],
+      "description": "wajib untuk representation_type unstructured/semi_structured",
+      "required": ["text"],
+      "properties": {
+        "text": {"type": "string"},
+        "char_start": {"type": ["integer", "null"]},
+        "char_end": {"type": ["integer", "null"]}
+      }
+    },
+    "support_valid": {"type": "boolean", "description": "false -> unsupported claim"},
+    "extractor_version": {"type": "string"}
+  },
+  "additionalProperties": true
+}

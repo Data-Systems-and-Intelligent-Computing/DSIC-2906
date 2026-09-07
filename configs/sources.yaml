@@ -1,0 +1,31 @@
+# Definisi sumber dan family lineage.
+# Wikidata dan Wikipedia berbagi family `wikimedia` agar tidak dihitung
+# sebagai dua corroboration independen.
+sources:
+  S1:
+    id: jadesta
+    role: structured_seed
+    family: jadesta
+    representation_type: structured
+    acquisition: raw_scraped_csv
+    is_ground_truth: false      # JADESTA bukan truth; hanya seed
+  S2:
+    id: wikidata
+    role: structured_corroboration
+    family: wikimedia
+    representation_type: structured
+    acquisition: sparql_api
+  S3:
+    id: wikipedia
+    role: textual_evidence
+    family: wikimedia
+    representation_type: semi_structured_text
+    acquisition: mediawiki_api
+
+# Publisher berita dibekukan sebelum akuisisi held-out (E0 langkah 12).
+# Isi daftar ini saat H3-H4, lalu jangan tambah publisher baru.
+news_publishers: []
+
+independence_rule:
+  same_family_counts_as_one: true
+  same_story_lineage_counts_as_one: true

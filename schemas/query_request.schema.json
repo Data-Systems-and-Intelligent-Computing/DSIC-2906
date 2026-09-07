@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "dsic2906/query_request.schema.json",
+  "title": "QueryRequest",
+  "description": "Satu unit keputusan: entity x attribute x query_time. Workload identik untuk B0/B1/B2/P1.",
+  "type": "object",
+  "required": ["request_id", "entity_id", "attribute", "query_time", "query_type"],
+  "properties": {
+    "request_id": {"type": "string"},
+    "entity_id": {"type": "string"},
+    "attribute": {"type": "string"},
+    "query_time": {"type": "string", "format": "date-time"},
+    "query_type": {"enum": ["Q1", "Q2", "Q3"]},
+    "profile_id": {"type": ["string", "null"], "description": "mengelompokkan sel-sel Q2 dalam satu profil entitas"},
+    "attribute_class": {"enum": ["time_sensitive", "stable_control"]},
+    "in_heldout": {"type": "boolean"},
+    "has_news_evidence": {"type": ["boolean", "null"], "description": "stratum sampling; bukan input routing"}
+  },
+  "additionalProperties": true
+}

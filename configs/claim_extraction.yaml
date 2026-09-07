@@ -1,0 +1,21 @@
+# Extraction BUKAN novelty. Ekstraktor dibekukan sebelum held-out.
+extractor:
+  version: v1
+  method: rule_based
+  deterministic: true
+  use_llm: false                # main study tidak memakai learned/LLM extraction
+
+# Setiap claim unstructured wajib punya span yang benar-benar mendukung
+# normalized_value. Tanpa itu -> unsupported claim, tidak boleh jadi corroboration.
+support_span:
+  required_for_unstructured: true
+  min_chars: 20
+  max_chars: 600
+  must_contain_normalized_value_evidence: true
+
+audit:
+  sample_size: 100
+  min_sample_fraction: 0.20
+  output: data/annotations/news_claim_audit.csv
+
+freeze_before_heldout: true

@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "dsic2906/source_snapshot.schema.json",
+  "title": "SourceSnapshot",
+  "description": "Satu payload mentah immutable di raw zone. Tanpa record ini, gate 'snapshots reproducible' tidak dapat lulus.",
+  "type": "object",
+  "required": [
+    "snapshot_id", "source_id", "source_family", "representation_type",
+    "url_or_reference", "fetched_at", "http_status", "checksum_sha256", "raw_path"
+  ],
+  "properties": {
+    "snapshot_id": {"type": "string"},
+    "source_id": {"type": "string", "description": "jadesta | wikidata | wikipedia | <publisher>"},
+    "source_family": {"type": "string", "description": "wikimedia menyatukan wikidata+wikipedia"},
+    "representation_type": {"enum": ["structured", "semi_structured_text", "unstructured_text"]},
+    "url_or_reference": {"type": "string"},
+    "publisher": {"type": ["string", "null"]},
+    "published_at": {"type": ["string", "null"], "format": "date-time", "description": "null hanya untuk sumber tanpa waktu terbit; claim berita tanpa nilai ini tidak temporally eligible"},
+    "fetched_at": {"type": "string", "format": "date-time"},
+    "http_status": {"type": "integer"},
+    "discovery_query": {"type": ["string", "null"]},
+    "story_lineage_id": {"type": ["string", "null"], "description": "mengelompokkan syndication dari satu origin"},
+    "checksum_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "raw_path": {"type": "string"},
+    "content_type": {"type": ["string", "null"]}
+  },
+  "additionalProperties": true
+}

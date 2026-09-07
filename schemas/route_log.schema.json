@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "dsic2906/route_log.schema.json",
+  "title": "RouteLog",
+  "description": "Satu baris per (request, policy). Inilah bukti mentah untuk risk/coverage/DCR/BDCR dan cost.",
+  "type": "object",
+  "required": ["request_id", "policy", "conflict_label", "action", "answered", "latency_ms"],
+  "properties": {
+    "request_id": {"type": "string"},
+    "entity_id": {"type": "string"},
+    "attribute": {"type": "string"},
+    "query_time": {"type": "string", "format": "date-time"},
+    "policy": {"enum": ["B0", "B1", "B2", "P1"]},
+    "state_type": {"enum": ["none", "C_S", "C_SU"]},
+    "conflict_label": {"enum": ["CLEAN", "MODERATE", "SEVERE", "INSUFFICIENT", "NA"]},
+    "action": {"enum": ["D", "V", "A"], "description": "Direct | Verify | Abstain"},
+    "answered": {"type": "boolean", "description": "false untuk Abstain dan untuk Verify yang gagal menemukan supported value"},
+    "returned_value": {"type": ["string", "null"]},
+    "value_supported": {"type": ["boolean", "null"], "description": "dasar unsupported_answer_rate"},
+    "verification_invoked": {"type": "boolean"},
+    "evidence_claims_touched": {"type": "integer", "minimum": 0},
+    "articles_touched": {"type": "integer", "minimum": 0},
+    "latency_ms": {"type": "number", "minimum": 0},
+    "repetition": {"type": ["integer", "null"]},
+    "warmup": {"type": "boolean"},
+    "snapshot_id": {"type": ["string", "null"], "description": "Iceberg snapshot; wajib sama untuk keempat policy"},
+    "rule_version": {"type": ["string", "null"]}
+  },
+  "additionalProperties": true
+}

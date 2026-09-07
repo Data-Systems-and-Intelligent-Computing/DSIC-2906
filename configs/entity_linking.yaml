@@ -1,0 +1,20 @@
+# Entity linking BUKAN novelty (publication boundary).
+# Rule dibekukan sebelum held-out dan diaudit terpisah dari routing error.
+linking:
+  strategy: rule_based_then_fuzzy_then_manual
+  normalize:
+    lowercase: true
+    strip_punctuation: true
+    strip_legal_prefixes: ["desa wisata", "kampung wisata", "pokdarwis"]
+  fuzzy:
+    algorithm: token_set_ratio
+    accept_threshold: 92        # >= diterima otomatis
+    review_threshold: 80        # 80-91 masuk antrean manual review
+  manual_review_required_below_accept: true
+
+audit:
+  sample_size: 100
+  min_sample_fraction: 0.20
+  output: data/annotations/entity_link_audit.csv
+
+freeze_before_heldout: true

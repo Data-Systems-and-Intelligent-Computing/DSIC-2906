@@ -1,0 +1,8 @@
+# Dibekukan akhir Minggu 1 oleh scripts/04_freeze_sources.sh.
+# Setelah cutoff, tidak boleh ada sumber/publisher baru masuk held-out evaluation.
+source_cutoff: FILL          # ISO 8601, mis. 2026-09-30T00:00:00Z
+evidence_cutoff: FILL        # batas published_at evidence yang boleh dipakai
+frozen_at: FILL
+frozen_by: FILL
+publishers_frozen: []
+note: "Perubahan setelah tanggal ini wajib dicatat dan membatalkan hasil held-out sebelumnya."

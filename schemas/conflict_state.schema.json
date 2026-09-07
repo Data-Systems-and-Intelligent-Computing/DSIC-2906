@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "dsic2906/conflict_state.schema.json",
+  "title": "ConflictState",
+  "description": "C_S (structured-only) atau C_SU (augmented) untuk satu entity x attribute x query_time.",
+  "type": "object",
+  "required": ["entity_id", "attribute", "query_time", "state_type", "label", "eligible_claim_count"],
+  "properties": {
+    "entity_id": {"type": "string"},
+    "attribute": {"type": "string"},
+    "query_time": {"type": "string", "format": "date-time"},
+    "state_type": {"enum": ["C_S", "C_SU"]},
+    "label": {"enum": ["CLEAN", "MODERATE", "SEVERE", "INSUFFICIENT"]},
+    "eligible_claim_count": {"type": "integer", "minimum": 0},
+    "distinct_normalized_values": {"type": "integer", "minimum": 0},
+    "independent_source_count": {"type": "integer", "minimum": 0, "description": "dihitung SETELAH dedupe source_family dan story_lineage"},
+    "corroborated_value": {"type": ["string", "null"]},
+    "news_claims_eligible": {"type": "integer", "minimum": 0},
+    "news_claims_excluded_after_query_time": {"type": "integer", "minimum": 0},
+    "news_claims_excluded_stale": {"type": "integer", "minimum": 0},
+    "news_claims_excluded_unsupported": {"type": "integer", "minimum": 0},
+    "news_claims_excluded_syndicated": {"type": "integer", "minimum": 0},
+    "rule_version": {"type": "string"}
+  },
+  "additionalProperties": true
+}
