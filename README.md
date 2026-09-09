@@ -1184,10 +1184,10 @@ Lakehouse stack adalah testbed, bukan otomatis novelty “big data”.
 
 ## Quality Gate — Minggu 1
 
-- [ ] MinIO berjalan reproducibly.
+- [x] MinIO berjalan reproducibly.
 - [ ] Iceberg snapshot dapat dibaca.
 - [ ] Spark dan Trino melihat data yang konsisten.
-- [ ] JADESTA raw di-ingest.
+- [x] JADESTA raw di-ingest.
 - [ ] Candidate pool 300–500 dibekukan.
 - [ ] Wikidata/Wikipedia acquired.
 - [ ] Tourism news acquired.
@@ -1287,11 +1287,11 @@ Jika gate gagal:
 
 Hari 1–2:
 
-- freeze RQ;
-- freeze publication boundary;
-- deploy MinIO/Iceberg/Spark/Trino;
-- Airflow hanya bila stabil;
-- ingest JADESTA.
+- freeze RQ ✅;
+- freeze publication boundary  ✅;
+- deploy MinIO/Iceberg/Spark/Trino  ✅;
+- Airflow hanya bila stabil ✅;
+- ingest JADESTA ✅.
 
 Hari 3–4:
 
